@@ -1,0 +1,73 @@
+{
+
+  "ano":"2026",
+
+  "raizPastas": "C:\\Users\\Marcelo\\Downloads\\TestePastas",
+
+  "departamentos": ["Contábil", "Fiscal", "Pessoal", "Societário","Reuniões"],
+
+  "fiscal": {
+
+
+      "simples": [
+                        "Comparativo Entradas X Saída",
+                        "Declarações Serviço Prefeitura",
+                        "DIRBI",
+                        "EFD REINF",
+                        "FATOR R",
+                        "Guias",
+                        "ICMS DSTDA",
+                        "Nota Fiscal Entrada e saída",
+                        "Parcelamentos",
+                        "PERDCOMP",
+                        "PGDAS",
+                        "Recalculados",
+                        "Relatório de Apuração",
+                        "Serviço Prestado",
+                        "Serviço Tomado",
+                        "SINTEGRA"
+                        ],
+
+      "presumidoReal" : [
+
+                        "Comparativo Entradas X Saída",
+                        "DCTF-REDARF",
+                        "Declarações Serviço Prefeitura",
+                        "DIME-DCIP", "DIRBI",
+                        "EFD Contribuições",
+                        "EFD REINF" ,
+                        "Guias",
+                        "Nota Fiscal Entrada e Saída e classificações",
+                        "MIT",
+                        "Parcelamentos",
+                        "PERDCOMP",
+                        "Relatório de Apuração",
+                        "Serviço Prestado",
+                        "Serviço Tomado",
+                        "SPED ICMS"
+
+      ]
+
+  },
+
+  "contabil":{
+
+    "simples":[]
+
+
+  },
+
+
+  "pessoal": { "simples":[
+                        "Admissão",
+                        "DCTFWEB",
+                        "Demissão",
+                        "Fechamentos",
+                        "Guias",
+                        "Lançamentos",
+                        "PERDCOMP"]},
+
+  "alvaras": ["Bombeiros", "Prefeitura", "Vigilância Sanitária"],
+
+  "cnds": ["Estadual", "Federal", "FGTS", "Municipal", "Trabalhista"]
+}
