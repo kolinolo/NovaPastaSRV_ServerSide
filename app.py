@@ -60,7 +60,7 @@ def NovaPasta (novaPasta:npRequest):
 
     elif novaPasta.tributacao == 'Simples Nacional':
 
-        tributacao = "Simplse Nacional"
+        tributacao = "Simples Nacional"
 
         pastasFiscal = configs['fiscal']['simples']
         pastasContabil = configs['contabil']['simples']
