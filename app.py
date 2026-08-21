@@ -1,6 +1,6 @@
 import json
 import os
-from os import makedirs
+from pathlib  import Path 
 
 from pydantic import BaseModel
 from fastapi import FastAPI
@@ -77,81 +77,81 @@ def NovaPasta (novaPasta:npRequest):
     nomeArquivo = novaPasta.nome
     contAnterior = novaPasta.contabilidadeA
 
-    if nomeArquivo in os.listdir(f"{nivel}\\{tributacao}\\Clientes ativos"): raise pastaExistenteError(nomeArquivo)
+    if nomeArquivo in os.listdir(f"{nivel}/{tributacao}/Clientes ativos"): raise pastaExistenteError(nomeArquivo)
 
-    makedirs(f"{nivel}\\{tributacao}\\Clientes ativos\\{nomeArquivo}")
+    Path(f"{nivel}/{tributacao}/Clientes ativos/{nomeArquivo}").mkdir(parents=True)
 
-    nivel = f"{nivel}\\{tributacao}\\Clientes ativos\\{nomeArquivo}"
+    nivel = f"{nivel}/{tributacao}/Clientes ativos/{nomeArquivo}"
 
     for departamento in configs['departamentos'][:3]:
 
         for mes in meses:
-            makedirs(f"{nivel}\\{departamento}\\Ano {anoAtual}\\{mes}")
-            f"{nivel}\\{departamento}\\Ano {anoAtual}\\{mes}"
+            Path(f"{nivel}/{departamento}/Ano {anoAtual}/{mes}").mkdir(parents=True)
+            f"{nivel}/{departamento}/Ano {anoAtual}/{mes}"
 
             if departamento == "Fiscal":
                 for pastaFiscal in pastasFiscal:
-                    makedirs(f"{nivel}\\{departamento}\\Ano {anoAtual}\\{mes}\\{pastaFiscal}")
+                    Path(f"{nivel}/{departamento}/Ano {anoAtual}/{mes}/{pastaFiscal}").mkdir(parents=True)
 
 
             elif departamento == "Pessoal":
                 for pastaPessoal in pastasPessoal:
-                    makedirs(f"{nivel}\\{departamento}\\Ano {anoAtual}\\{mes}\\{pastaPessoal}")
+                    Path(f"{nivel}/{departamento}/Ano {anoAtual}/{mes}/{pastaPessoal}").mkdir(parents=True)
 
         if departamento == "Contábil":
 
             if tributacao == "Simples Nacional":
 
-                makedirs(f"{nivel}\\{departamento}\\Ano {anoAtual}\\Livro Contábil Autenticado")
+                Path(f"{nivel}/{departamento}/Ano {anoAtual}/Livro Contábil Autenticado").mkdir(parents=True)
 
 
             else:
 
-                makedirs(f"{nivel}\\{departamento}\\Ano {anoAtual}\\Declarações Anuais")
+                Path(f"{nivel}/{departamento}/Ano {anoAtual}/Declarações Anuais").mkdir(parents=True)
 
-            makedirs(f"{nivel}\\{departamento}\\Ano {anoAtual}\\Fechamento Anual")
+            Path(f"{nivel}/{departamento}/Ano {anoAtual}/Fechamento Anual").mkdir(parents=True)
 
-            if contAnterior: makedirs(f"{nivel}\\{departamento}\\Contabilidade Anterior")
+            if contAnterior: Path(f"{nivel}/{departamento}/Contabilidade Anterior").mkdir(parents=True)
 
             if tributacao != "Simples Nacional":
-                makedirs(f"{nivel}\\{departamento}\\Ano {anoAtual}\\Declarações Anuais\\ECD")
-                makedirs(f"{nivel}\\{departamento}\\Ano {anoAtual}\\Declarações Anuais\\ECF")
+                Path(f"{nivel}/{departamento}/Ano {anoAtual}/Declarações Anuais/ECD").mkdir(parents=True)
+                Path(f"{nivel}/{departamento}/Ano {anoAtual}/Declarações Anuais/ECF").mkdir(parents=True)
 
 
         elif departamento == "Fiscal":
-            makedirs(f"{nivel}\\{departamento}\\Ano {anoAtual}\\Declarações Anuais\\DIMOB")
-            makedirs(f"{nivel}\\{departamento}\\Ano {anoAtual}\\Declarações Anuais\\DIMED")
-            if contAnterior: makedirs(f"{nivel}\\{departamento}\\Contabilidade Anterior")
+            Path(f"{nivel}/{departamento}/Ano {anoAtual}/Declarações Anuais/DIMOB").mkdir(parents=True)
+            Path(f"{nivel}/{departamento}/Ano {anoAtual}/Declarações Anuais/DIMED").mkdir(parents=True)
+            if contAnterior: Path(f"{nivel}/{departamento}/Contabilidade Anterior").mkdir(parents=True)
 
             if tributacao == "Simples Nacional":
-                makedirs(f"{nivel}\\{departamento}\\Ano {anoAtual}\\Declarações Anuais\\DEFIS")
+                Path(f"{nivel}/{departamento}/Ano {anoAtual}/Declarações Anuais/DEFIS").mkdir(parents=True)
 
         elif departamento == "Pessoal":
-            makedirs(f"{nivel}\\{departamento}\\Ano {anoAtual}\\Declarações Anuais\\DIRF")
-            makedirs(f"{nivel}\\{departamento}\\Ano {anoAtual}\\Declarações Anuais\\RAIS")
-            if contAnterior: makedirs(f"{nivel}\\{departamento}\\Contabilidade Anterior")
+            Path(f"{nivel}/{departamento}/Ano {anoAtual}/Declarações Anuais/DIRF").mkdir(parents=True)
+            Path(f"{nivel}/{departamento}/Ano {anoAtual}/Declarações Anuais/RAIS").mkdir(parents=True)
+            if contAnterior: Path(f"{nivel}/{departamento}/Contabilidade Anterior").mkdir(parents=True)
 
     departamento = 'Societário'
-    nivel = f"{configs['raizPastas']}\\{tributacao}\\Clientes ativos\\{nomeArquivo}\\Societário"
+    nivel = f"{configs['raizPastas']}/{tributacao}/Clientes ativos/{nomeArquivo}/Societário"
 
-    makedirs(f"{nivel}\\CND\\{anoAtual}")
+    Path(f"{nivel}/CND/{anoAtual}").mkdir(parents=True)
     for mes in meses:
-        makedirs(f"{nivel}\\CND\\{anoAtual}\\{mes}")
+        Path(f"{nivel}/CND/{anoAtual}/{mes}").mkdir(parents=True)
         for cnd in configs['cnds']:
-            makedirs(f"{nivel}\\CND\\{anoAtual}\\{mes}\\{cnd}")
+            Path(f"{nivel}/CND/{anoAtual}/{mes}/{cnd}").mkdir(parents=True)
 
-    makedirs(f"{nivel}\\Docs Cadastrais")
-    makedirs(f"{nivel}\\Docs Cadastrais\\Procuração")
-    makedirs(f"{nivel}\\Docs Cadastrais\\Processos\\Abertura")
+    Path(f"{nivel}/Docs Cadastrais").mkdir(parents=True)
+    Path(f"{nivel}/Docs Cadastrais/Procuração").mkdir(parents=True)
+    Path(f"{nivel}/Docs Cadastrais/Processos/Abertura").mkdir(parents=True)
 
     for alvara in configs['alvaras']:
-        makedirs(f"{nivel}\\Docs Cadastrais\\Alvarás\\{anoAtual}\\{alvara}")
+        Path(f"{nivel}/Docs Cadastrais/Alvarás/{anoAtual}/{alvara}").mkdir(parents=True)
 
     for pastaSocietario in ["Cods e Acesso da Empresa", "Docs CNPJ", "Notificações multas", "Docs sócios",
                             "Termos de Responsabilidade"]:
-        makedirs(f"{nivel}\\Docs Cadastrais\\{pastaSocietario}")
+        Path(f"{nivel}/Docs Cadastrais/{pastaSocietario}").mkdir(parents=True)
 
-    makedirs(f"{configs['raizPastas']}\\{tributacao}\\Clientes ativos\\{nomeArquivo}\\Reuniões")
+    Path(f"{configs['raizPastas']}/{tributacao}/Clientes ativos/{nomeArquivo}/Reuniões").mkdir(parents=True)
 
     return 200
 
@@ -193,4 +193,4 @@ class pastaExistenteError(Exception):
 
 if __name__ == "__main__":  # Caso seja a primeira função chamada, executa o servidor com uvicorn na porta 80000
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=80)
+    uvicorn.run(app, host="0.0.0.0", port=81)
